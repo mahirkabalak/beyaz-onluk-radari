@@ -317,6 +317,11 @@ details.q[open]{border-color:var(--gold)}
 @media (max-width:680px){.dock{left:16px;transform:none;max-width:calc(100vw - 32px - 64px)}.dock button{width:34px;height:34px;font-size:1.02rem}.dock button.on::after{display:none}}
 @media (prefers-reduced-motion:reduce){.dock button{transition:none}}
 .foot .wrap{padding-bottom:96px}
+.dock,.backtop{transition:translate .32s cubic-bezier(.2,.8,.2,1),opacity .22s ease,transform .25s}
+.dock.hid,.backtop.hid{translate:0 calc(100% + 28px);opacity:0;pointer-events:none}
+.dock.pop button.on{animation:dockpop .38s cubic-bezier(.2,.8,.2,1)}
+@keyframes dockpop{0%{transform:scale(.7)}60%{transform:scale(1.22)}100%{transform:scale(1.12)}}
+@media (prefers-reduced-motion:reduce){.dock,.backtop{transition:opacity .15s}.dock.hid,.backtop.hid{translate:0 0}.dock.pop button.on{animation:none}}
 .wsheet{background:#FFFFFF;color:#13213B;border:1px solid #DCE1EA;border-radius:14px;box-shadow:0 18px 40px rgba(8,20,41,.10);overflow:hidden;color-scheme:light}
 .wsheet .wtop{padding:22px 24px 0;display:grid;gap:8px}
 .wsheet .wtop p{color:#56627A;font-size:.92rem;max-width:64ch}
@@ -938,6 +943,14 @@ details.q[open]{border-color:var(--gold)}
   const prog=$("#dockProg");
   const onProg=()=>{ const h=document.documentElement.scrollHeight-innerHeight; prog.style.width=(h>0?Math.min(100,scrollY/h*100):0)+"%"; };
   window.addEventListener("scroll",onProg,{passive:true}); onProg();
+  let lastY=scrollY, hideT;
+  const showBars=()=>{ if(dock.classList.contains("hid")){ dock.classList.remove("hid"); dock.classList.remove("pop"); void dock.offsetWidth; dock.classList.add("pop"); } bt.classList.remove("hid"); };
+  window.addEventListener("scroll",()=>{
+    const y=scrollY, d=y-lastY; lastY=y;
+    if(d>4 && y>200){ dock.classList.add("hid"); bt.classList.add("hid"); }
+    else if(d<-4){ showBars(); }
+    clearTimeout(hideT); hideT=setTimeout(showBars,650);
+  },{passive:true});
 
   const PHOTO={"tumu": "https://images.unsplash.com/photo-1516841273335-e39b37888115?auto=format&fit=crop&w=1000&q=75", "medikal-estetik": "https://images.unsplash.com/photo-1665231795856-769fb08a90bc?auto=format&fit=crop&w=1000&q=75", "plastik-cerrahi": "https://images.unsplash.com/photo-1514416309827-bfb0cf433a2d?auto=format&fit=crop&w=1000&q=75", "dermatoloji": "https://images.unsplash.com/photo-1676312754401-d97fe43c2c4b?auto=format&fit=crop&w=1000&q=75", "dis": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=75", "cerrahi": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1000&q=75", "ortopedi-ftr": "https://images.unsplash.com/photo-1649751361457-01d3a696c7e6?auto=format&fit=crop&w=1000&q=75", "laboratuvar": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1000&q=75", "radyoloji": "https://images.unsplash.com/photo-1666214280352-db292c05fd80?auto=format&fit=crop&w=1000&q=75", "kadin-dogum": "https://images.unsplash.com/photo-1654931800911-7a9cfb3b7c17?auto=format&fit=crop&w=1000&q=75", "kardiyoloji": "https://images.unsplash.com/photo-1682706841281-f723c5bfcd83?auto=format&fit=crop&w=1000&q=75", "dahiliye": "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=1000&q=75", "aile-hekimligi": "https://images.unsplash.com/photo-1758691461935-202e2ef6b69f?auto=format&fit=crop&w=1000&q=75", "m-muayenehane": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1000&q=75", "m-cerrahi": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1000&q=75", "m-devlet": "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=1000&q=75"};
   const photoImg=(k,alt)=>'<img loading="lazy" src="'+PHOTO[k]+'" alt="'+esc(alt)+'">';
