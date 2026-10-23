@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mahirkabalak.github.io/beyaz-onluk-radari/sitemap.xml
