@@ -24,16 +24,17 @@
 <body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: lacivert kurumsal şerit + iki sütun (ana akış | TTB günlük kenar sütunu), mobilde tek sütun. Altın = vurgu, sarı = arama ve "sık atlanan" uyarıları. */
 :root{
   --bg:#F3F5F9; --surface:#FFFFFF; --surface-2:#E9EDF4;
   --ink:#13213B; --muted:#56627A; --line:#D9DEE8;
-  --navy:#0E2244; --navy-ink:#F2F4F8; --gold:#9C7630; --gold-soft:#F3EAD6;
+  --navy:#0E2244; --navy-ink:#F2F4F8; --gold:#9C7630; --gold-text:#6E5016; --gold-soft:#F3EAD6;
   --mark:#FFE24D; --mark-ink:#1A1A1A; --warn-bg:#FFF6C9; --warn-line:#E5C93A;
   --ok:#2F7A55; --crit:#B23A3A;
-  --f-display:"Bodoni Moda","Didot","Times New Roman",serif;
+  --royal:#1D3FAE; --hero-bg:#FFFFFF; --hero-ink:#0E2244; --hero-sub:#3A4660; --hero-line:#D5DDF2; --hero-card:#FFFFFF; --hero-card-hover:#EEF2FD; --hero-accent:#1D3FAE; --top-bg:#FFFFFF; --top-ink:#13213B; --warn-ink:#634800; --on-royal:#FFFFFF;
+  --f-display:"Libre Franklin","Franklin Gothic Medium","Franklin Gothic","Helvetica Neue",Arial,sans-serif;
   --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
   --r:10px;
@@ -41,15 +42,17 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0A1222; --surface:#101C32; --surface-2:#16253F;
   --ink:#E7EBF3; --muted:#9BA7BD; --line:#24344F;
-  --navy:#081429; --navy-ink:#E7EBF3; --gold:#D6B26A; --gold-soft:#2A2516;
+  --navy:#081429; --navy-ink:#E7EBF3; --gold:#D6B26A; --gold-text:#E2C487; --gold-soft:#2A2516;
   --mark:#E9C930; --mark-ink:#111; --warn-bg:#2E2810; --warn-line:#8C7A22;
-  --ok:#5FBF8C; --crit:#E07070; color-scheme:dark}}
+  --ok:#5FBF8C; --crit:#E07070;
+  --royal:#8FAEFF; --hero-bg:#0A1730; --hero-ink:#F2F4F8; --hero-sub:#C9D1E0; --hero-line:rgba(143,174,255,.32); --hero-card:rgba(255,255,255,.05); --hero-card-hover:rgba(255,255,255,.11); --hero-accent:#9FBAFF; --top-bg:#081429; --top-ink:#E7EBF3; --warn-ink:#FFE680; --on-royal:#0A1730; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0A1222; --surface:#101C32; --surface-2:#16253F;
   --ink:#E7EBF3; --muted:#9BA7BD; --line:#24344F;
-  --navy:#081429; --navy-ink:#E7EBF3; --gold:#D6B26A; --gold-soft:#2A2516;
+  --navy:#081429; --navy-ink:#E7EBF3; --gold:#D6B26A; --gold-text:#E2C487; --gold-soft:#2A2516;
   --mark:#E9C930; --mark-ink:#111; --warn-bg:#2E2810; --warn-line:#8C7A22;
-  --ok:#5FBF8C; --crit:#E07070; color-scheme:dark}
+  --ok:#5FBF8C; --crit:#E07070;
+  --royal:#8FAEFF; --hero-bg:#0A1730; --hero-ink:#F2F4F8; --hero-sub:#C9D1E0; --hero-line:rgba(143,174,255,.32); --hero-card:rgba(255,255,255,.05); --hero-card-hover:rgba(255,255,255,.11); --hero-accent:#9FBAFF; --top-bg:#081429; --top-ink:#E7EBF3; --warn-ink:#FFE680; --on-royal:#0A1730; color-scheme:dark}
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.6}
@@ -349,6 +352,98 @@ details.q[open]{border-color:var(--gold)}
 @media (max-width:680px){.wlist{grid-template-columns:minmax(0,1fr)}.wtop,.wpanel{padding-left:16px;padding-right:16px}.wtabs{padding-left:12px;padding-right:12px}}
 .cty .cph{margin:-18px -18px 2px;aspect-ratio:16/8;overflow:hidden;border-radius:var(--r) var(--r) 0 0;background:var(--surface-2)}
 .cty .cph img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.8) contrast(1.02)}
+
+/* --- readability fixes --- */
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-optical-sizing:auto}
+.eyebrow,.check .n,.cty .code,.tr-row .route,.ttb li .d,.lvl.onemli,.steps li::marker{color:var(--gold-text)}
+.eyebrow{font-size:.78rem;font-weight:500}
+.hero .eyebrow,.founder .mono,.atama .state{color:#E2C487}
+.wsheet .eyebrow{color:#6E5016}
+.v{font-size:.74rem!important;font-weight:600;letter-spacing:.05em}
+.v.no{background:#A8322F!important;color:#FFFFFF!important}
+.v.yes{background:#236B48!important;color:#FFFFFF!important}
+.v.cond{background:#F1E1B8!important;color:#4A3509!important}
+.tag,.lvl,.ad .adlbl,.cty .code,.ttb li .d,.tr-row .route{font-size:.76rem}
+.br-item .meta,.upd-meta{font-size:.82rem}
+.hero h1 em{font-style:italic;font-weight:600;color:#E2C487}
+.must q{font-family:var(--f-body);font-style:italic;font-weight:500}
+.qtoast{font-family:var(--f-body)!important;font-style:normal!important;font-weight:500;font-size:.95rem!important}
+.veil .quote{font-weight:500;font-size:1.25rem;line-height:1.45}
+.cty h3,.model h3,.pub h3,.ttb header h3,.founder h3,.brand b{font-weight:700;letter-spacing:0}
+.muted,.sec-head p,.why p,.kn p,.br-item p,.cty .who{color:var(--muted)}
+
+/* --- bottom bar never overlaps reading text --- */
+section,[id]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 84px)}
+.dock{left:0!important;right:0!important;transform:none!important;max-width:none!important;border-radius:0!important;border:0!important;border-top:1px solid var(--line)!important;background:var(--surface)!important;justify-content:center;gap:4px!important;padding:6px max(12px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))!important;bottom:0!important;box-shadow:0 -6px 18px rgba(8,20,41,.08)!important}
+.dock .prog{left:0!important;right:0!important;top:0;bottom:auto!important;height:2px;border-radius:0}
+.dock button.on::after{bottom:calc(100% + 12px)}
+.backtop{bottom:calc(66px + env(safe-area-inset-bottom,0px))!important}
+.qtoast{bottom:calc(70px + env(safe-area-inset-bottom,0px))!important}
+body{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px))}
+@media (max-width:680px){.dock{justify-content:flex-start}.backtop{right:calc(12px + env(safe-area-inset-right,0px))!important}}
+/* --- hero quick buttons --- */
+.quick{margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:640px}
+.quick a{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:center;text-decoration:none;color:#F2F4F8;background:rgba(255,255,255,.07);border:1px solid rgba(226,196,135,.38);border-radius:12px;padding:10px 12px;transition:background .2s,border-color .2s,transform .2s;min-width:0}
+.quick a:hover{background:rgba(255,255,255,.13);border-color:#E2C487;color:#FFFFFF;transform:translateY(-1px)}
+.quick a:focus-visible{outline:2px solid #E2C487;outline-offset:2px}
+.quick .i{grid-row:span 2;font-size:1.35rem;line-height:1}
+.quick b{font-size:.92rem;font-weight:600;line-height:1.2}
+.quick small{font-size:.76rem;color:#C9D1E0;line-height:1.25}
+.quick a.warn{border-color:rgba(255,226,77,.6)}
+.quick a.warn b{color:#FFE680}
+@media (max-width:680px){.quick{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){.quick a{transition:none}.quick a:hover{transform:none}}
+
+/* --- mobile: compact header, nothing floats over text --- */
+.qtoast{left:auto!important;right:calc(16px + env(safe-area-inset-right,0px));transform:translateY(10px)!important;width:min(340px,calc(100vw - 32px))!important;bottom:calc(122px + env(safe-area-inset-bottom,0px))!important}
+.qtoast.on{transform:translateY(0)!important}
+@media (max-width:680px){
+  .top .wrap{flex-wrap:nowrap;gap:12px;padding-block:10px}
+  .brand b{font-size:1.05rem;white-space:nowrap}
+  .nav{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;white-space:nowrap;margin-left:0;min-width:0;mask-image:linear-gradient(90deg,#000 85%,transparent)}
+  .nav::-webkit-scrollbar{display:none}
+  .qtoast{display:none!important}
+  .backtop{padding:8px!important;font-size:0!important;gap:0!important}
+  .backtop svg{width:30px;height:30px}
+  section,[id]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 64px)}
+}
+
+/* --- white + royal blue first impression --- */
+body::before{background:var(--top-bg)}
+.top{background:var(--top-bg);color:var(--top-ink);border-bottom:1px solid var(--hero-line);box-shadow:0 2px 14px rgba(14,34,68,.06)}
+.brand,.brand b{color:var(--top-ink)}
+.brand svg{color:var(--royal)}
+.nav a{color:var(--top-ink);opacity:.82}
+.nav a:hover{color:var(--royal);opacity:1}
+.hero{background:linear-gradient(90deg,var(--hero-bg) 0%,var(--hero-bg) 44%,color-mix(in srgb,var(--hero-bg) 70%,transparent) 66%,color-mix(in srgb,var(--hero-bg) 15%,transparent) 100%),url("https://images.unsplash.com/photo-1625134673337-519d4d10b313?auto=format&fit=crop&w=1800&q=75") right center/cover no-repeat,var(--hero-bg)!important}
+@media (max-width:680px){.hero{background:linear-gradient(180deg,color-mix(in srgb,var(--hero-bg) 90%,transparent),color-mix(in srgb,var(--hero-bg) 97%,transparent)),url("https://images.unsplash.com/photo-1625134673337-519d4d10b313?auto=format&fit=crop&w=900&q=75") center/cover no-repeat,var(--hero-bg)!important}}
+.hero{color:var(--hero-ink);border-bottom:1px solid var(--hero-line);position:relative}
+.hero::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--royal),color-mix(in srgb,var(--royal) 40%,transparent))}
+.hero .eyebrow{color:var(--hero-accent)!important;font-weight:600}
+.hero h1{color:var(--hero-ink)}
+.hero h1 em{color:var(--hero-accent)!important}
+.hero p.lead{color:var(--hero-sub)}
+.hero .chip{color:var(--hero-ink);border-color:var(--hero-line);background:var(--hero-card)}
+.radar{color:var(--hero-accent)}
+.quick a{color:var(--hero-ink);background:var(--hero-card);border:1px solid var(--hero-line);box-shadow:0 1px 2px rgba(14,34,68,.05)}
+.quick a b{color:var(--hero-accent)}
+.quick small{color:var(--hero-sub)}
+.quick a:hover{background:var(--hero-card-hover);border-color:var(--royal);color:var(--hero-ink);box-shadow:0 6px 18px rgba(29,63,174,.12)}
+.quick a:focus-visible{outline-color:var(--royal)}
+.quick a.warn{background:var(--warn-bg);border-color:var(--warn-line)}
+.quick a.warn b{color:var(--warn-ink)}
+.sbox button,:root[data-theme="dark"] .sbox button{background:var(--royal)!important;color:var(--on-royal)!important}
+@media (min-width:681px){.hero .radar{display:none}}
+
+/* --- display face: Libre Franklin (American gothic) --- */
+h2{font-weight:700;letter-spacing:-.015em}
+.hero h1{font-weight:800;letter-spacing:-.025em;line-height:1.05}
+.hero h1 em{font-weight:700;font-style:italic}
+.brand b{font-weight:700;letter-spacing:-.01em}
+.cty h3,.model h3,.pub h3,.ttb header h3,.founder h3{font-weight:700;letter-spacing:-.01em}
+.veil .logo{font-weight:700}
+.veil .quote{font-weight:600;font-size:1.15rem}
+@media (min-width:681px){.top .wrap{flex-wrap:nowrap}.brand{flex:none}.brand b{font-size:1.12rem}.nav{gap:4px 13px;font-size:.81rem;justify-content:flex-end;min-width:0}}
 .pub{margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:10px}
 .pub h3{font-family:var(--f-display);font-size:1.15rem;font-weight:700}
 .pub .modes{display:flex;gap:6px}
@@ -383,7 +478,7 @@ details.q[open]{border-color:var(--gold)}
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#ust" aria-label="Beyaz Önlük Radarı ana sayfa">
-      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="11.5" fill="none" stroke="#D6B26A" stroke-width="1.5"/><circle cx="13" cy="13" r="6" fill="none" stroke="#D6B26A" stroke-width="1" opacity=".6"/><path d="M13 13 L22 7" stroke="#F2F4F8" stroke-width="1.8" stroke-linecap="round"/><circle cx="18.5" cy="9.2" r="1.6" fill="#D6B26A"/></svg>
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="11.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="13" cy="13" r="6" fill="none" stroke="currentColor" stroke-width="1" opacity=".55"/><path d="M13 13 L22 7" style="stroke:var(--top-ink)" stroke-width="1.8" stroke-linecap="round"/><circle cx="18.5" cy="9.2" r="1.7" fill="#C9A24E"/></svg>
       <b>Beyaz Önlük Radarı</b>
     </a>
     <nav class="nav" aria-label="Bölümler">
@@ -398,20 +493,29 @@ details.q[open]{border-color:var(--gold)}
       <p class="eyebrow">Hekimler için mevzuat ve içerik pusulası</p>
       <h1>Paylaşmadan önce <em>radara</em> bakın.</h1>
       <p class="lead">Sağlıkta tanıtım ve bilgilendirme kuralları, klinik açma şartları, kadro ve atama süreçleri. Resmî Gazete ve Sağlık Bakanlığı kaynaklarına dayanır; yalnızca içerik üretimini etkileyen önemli değişiklikler radara girer.</p>
+
+      <nav class="quick" aria-label="Hızlı erişim">
+        <a href="#radar"><span class="i" aria-hidden="true">📜</span><b>Reklam yönetmeliği</b><small>Son değişiklikler</small></a>
+        <a href="#brans"><span class="i" aria-hidden="true">🩺</span><b>Branşlar</b><small>Branşınıza özel haberler</small></a>
+        <a href="#sorular" class="warn"><span class="i" aria-hidden="true">⚠️</span><b>Aman dikkat!</b><small>Yasaklar ve şartlılar</small></a>
+        <a href="#muayenehane"><span class="i" aria-hidden="true">🏥</span><b>Muayenehane açılış asistanı</b><small>Evrak ve şartlar</small></a>
+        <a href="#dunya"><span class="i" aria-hidden="true">🌍</span><b>Dünyada neler var?</b><small>6 ülkenin kuralları</small></a>
+        <a href="#atama"><span class="i" aria-hidden="true">🎲</span><b>Hekim atama</b><small>Kura ve geçişler</small></a>
+      </nav>
       <div class="status">
         <span class="chip"><span class="dot"></span>Yürürlükte: Tanıtım ve Bilgilendirme Yönetmeliği · RG 12.11.2025 / 33075</span>
         <span class="chip mono" id="lastCheck">Son kontrol: 23.10.2026</span>
       </div>
     </div>
     <svg class="radar" viewBox="0 0 190 190" aria-hidden="true">
-      <defs><linearGradient id="sw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#D6B26A" stop-opacity="0"/><stop offset="1" stop-color="#D6B26A" stop-opacity=".55"/></linearGradient></defs>
-      <circle cx="95" cy="95" r="88" fill="none" stroke="#D6B26A" stroke-opacity=".5"/>
-      <circle cx="95" cy="95" r="60" fill="none" stroke="#D6B26A" stroke-opacity=".3"/>
-      <circle cx="95" cy="95" r="32" fill="none" stroke="#D6B26A" stroke-opacity=".3"/>
-      <line x1="7" y1="95" x2="183" y2="95" stroke="#D6B26A" stroke-opacity=".2"/><line x1="95" y1="7" x2="95" y2="183" stroke="#D6B26A" stroke-opacity=".2"/>
+      <defs><linearGradient id="sw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--hero-accent)" stop-opacity="0"/><stop offset="1" style="stop-color:var(--hero-accent)" stop-opacity=".35"/></linearGradient></defs>
+      <circle cx="95" cy="95" r="88" fill="none" stroke="currentColor" stroke-opacity=".5"/>
+      <circle cx="95" cy="95" r="60" fill="none" stroke="currentColor" stroke-opacity=".3"/>
+      <circle cx="95" cy="95" r="32" fill="none" stroke="currentColor" stroke-opacity=".3"/>
+      <line x1="7" y1="95" x2="183" y2="95" stroke="currentColor" stroke-opacity=".2"/><line x1="95" y1="7" x2="95" y2="183" stroke="currentColor" stroke-opacity=".2"/>
       <g class="sweep"><path d="M95 95 L183 95 A88 88 0 0 0 157 33 Z" fill="url(#sw)"/></g>
-      <circle cx="140" cy="62" r="4" fill="#D6B26A"/><circle cx="62" cy="128" r="3" fill="#F2F4F8" opacity=".8"/><circle cx="118" cy="140" r="3" fill="#F2F4F8" opacity=".6"/>
-      <text x="95" y="99" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#F2F4F8" opacity=".8">RG · SB · TTB</text>
+      <circle cx="140" cy="62" r="4" fill="#C9A24E"/><circle cx="62" cy="128" r="3" fill="currentColor" opacity=".8"/><circle cx="118" cy="140" r="3" fill="currentColor" opacity=".6"/>
+      <text x="95" y="99" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="currentColor" opacity=".8">RG · SB · TTB</text>
     </svg>
   </div>
 </section>
